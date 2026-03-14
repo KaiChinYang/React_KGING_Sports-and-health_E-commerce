@@ -1,0 +1,24 @@
+/* 熱銷商品 */
+.best-sellers {
+    background-color: #f8f9fa;
+}
+
+.best-sellers .card {
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.best-sellers .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+.best-sellers .card-img-top {
+    height: 240px;
+    object-fit: cover;
+}
+
+.best-sellers .btn {
+    border-radius: 999px;
+}

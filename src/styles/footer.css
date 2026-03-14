@@ -1,0 +1,127 @@
+/* Footer */
+.kg-footer {
+    background: linear-gradient(180deg, #0a0a0a 0%, #111111 100%);
+    color: #ffffff;
+    border-top: 1px solid rgba(212, 175, 55, 0.14);
+}
+
+.kg-footer-top {
+    padding: 4rem 0 2.5rem;
+}
+
+.kg-footer-bottom {
+    padding: 1.25rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    text-align: center;
+    color: rgba(255, 255, 255, 0.58);
+    font-size: 0.95rem;
+}
+
+.kg-footer-logo {
+    display: inline-block;
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #d4af37;
+    margin-bottom: 1rem;
+}
+
+.kg-footer-logo:hover {
+    color: #f2d06b;
+}
+
+.kg-footer-text {
+    max-width: 320px;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.9;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+}
+
+.kg-footer-title {
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.kg-footer-title::after {
+    content: "";
+    display: block;
+    width: 42px;
+    height: 2px;
+    margin-top: 0.6rem;
+    background: linear-gradient(90deg, #d4af37, transparent);
+}
+
+.kg-footer-links li+li,
+.kg-footer-contact li+li {
+    margin-top: 0.85rem;
+}
+
+.kg-footer-links a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color 0.3s ease, padding-left 0.3s ease;
+}
+
+.kg-footer-links a:hover {
+    color: #d4af37;
+    padding-left: 4px;
+}
+
+.kg-footer-contact li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.8;
+}
+
+.kg-footer-contact i {
+    color: #d4af37;
+    font-size: 1rem;
+    margin-top: 0.2rem;
+}
+
+.kg-footer-social-link {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid rgba(212, 175, 55, 0.22);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #d4af37;
+    text-decoration: none;
+    background: rgba(212, 175, 55, 0.04);
+    transition: all 0.3s ease;
+}
+
+.kg-footer-social-link:hover {
+    color: #111111;
+    background: #d4af37;
+    border-color: #d4af37;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 991.98px) {
+    .kg-footer-top {
+        padding: 3rem 0 2rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .kg-footer-logo {
+        font-size: 1.75rem;
+    }
+
+    .kg-footer-text {
+        max-width: 100%;
+    }
+
+    .kg-footer-bottom {
+        font-size: 0.88rem;
+    }
+}
