@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2100 640">
+  <title>KGING Logo v12 Black</title>
+  <desc>KGING commercial logo, single-color black version.</desc>
+
+  <!-- Crown -->
+  <g id="crown" fill="#000000" transform="translate(140,4)">
+    <path d="
+      M910 64
+      L944 136
+      L1000 90
+      L1028 162
+      L1098 138
+      L1062 232
+      L758 232
+      L722 138
+      L792 162
+      L820 90
+      L876 136
+      Z"/>
+
+    <circle cx="910" cy="114" r="21"/>
+    <circle cx="815" cy="152" r="17"/>
+    <circle cx="1005" cy="152" r="17"/>
+    <circle cx="758" cy="188" r="14"/>
+    <circle cx="1062" cy="188" r="14"/>
+
+    <path d="
+      M790 252
+      Q910 224 1030 252
+      L1020 270
+      Q910 248 800 270
+      Z"/>
+  </g>
+
+  <!-- Wordmark -->
+  <g id="wordmark" fill="#000000">
+    <!-- K -->
+    <g transform="translate(110,0)">
+      <path d="
+        M38 520
+        L86 272
+        L176 272
+        L154 374
+        L266 272
+        L380 272
+        L238 398
+        L334 520
+        L226 520
+        L140 412
+        L118 520
+        Z"/>
+    </g>
+
+    <!-- G -->
+    <g transform="translate(450,0)">
+      <path d="
+        M72 520
+        L120 272
+        L356 272
+        L338 338
+        L184 338
+        L160 454
+        L314 454
+        L298 520
+        Z
+
+        M206 396
+        L326 396
+        L392 332
+        L482 332
+        L400 414
+        L452 520
+        L350 520
+        L312 442
+        L196 442
+        Z"/>
+    </g>
+
+    <!-- I -->
+    <g transform="translate(805,0)">
+      <path d="
+        M126 520
+        L176 272
+        L266 272
+        L216 520
+        Z"/>
+    </g>
+
+    <!-- N -->
+    <g transform="translate(1088,0)">
+      <path d="
+        M34 520
+        L84 272
+        L170 272
+        L278 410
+        L308 272
+        L396 272
+        L346 520
+        L260 520
+        L150 382
+        L120 520
+        Z"/>
+    </g>
+
+    <!-- G -->
+    <g transform="translate(1418,0)">
+      <path d="
+        M72 520
+        L120 272
+        L356 272
+        L338 338
+        L184 338
+        L160 454
+        L314 454
+        L298 520
+        Z
+
+        M206 396
+        L326 396
+        L392 332
+        L482 332
+        L400 414
+        L452 520
+        L350 520
+        L312 442
+        L196 442
+        Z"/>
+    </g>
+  </g>
+</svg>
