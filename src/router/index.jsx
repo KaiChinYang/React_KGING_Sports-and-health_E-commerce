@@ -7,6 +7,7 @@ import Cart from "../views/frontend/Cart";
 import Checkout from "../views/frontend/Checkout";
 import CheckoutSuccess from "../views/frontend/CheckoutSuccess";
 import NotFound from "../views/frontend/NotFound";
+import Favorite from "../views/frontend/Favorite";
 
 export const router = createHashRouter([
   {
@@ -16,6 +17,10 @@ export const router = createHashRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path: 'favorite',
+        element: <Favorite />, 
       },
       {
         path: "product",
@@ -34,7 +39,7 @@ export const router = createHashRouter([
         element: <Checkout />,
       },
       {
-        path: "checkout-success",
+        path: "checkout-success/:orderId",
         element: <CheckoutSuccess />,
       },
     ],

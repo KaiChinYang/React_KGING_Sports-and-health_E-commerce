@@ -27,14 +27,15 @@ export default function Home_GuaranteeBar() {
       desc: "有任何問題，都能獲得即時協助與回覆。",
     },
   ];
+
   return (
-    <section className="kg-guarantee-bar-section py-5">
+    <section className="home-guarantee-section">
       <div className="container">
-        <div className="kg-guarantee-bar-wrap">
-          <div className="text-center mb-4">
-            <span className="kg-section-subtitle">SHOP WITH CONFIDENCE</span>
-            <h2 className="kg-section-title mt-2">購物保障</h2>
-            <p className="kg-section-desc mb-0">
+        <div className="home-guarantee-wrap kging-card">
+          <div className="kging-section-heading text-center home-guarantee-heading">
+            <p className="kging-section-label">SHOP WITH CONFIDENCE</p>
+            <h2 className="kging-section-title">購物保障</h2>
+            <p className="kging-section-desc mx-auto mb-0">
               從下單到收貨，提供更安心順暢的選購體驗
             </p>
           </div>
@@ -43,19 +44,19 @@ export default function Home_GuaranteeBar() {
             {guarantees.map((item, index) => (
               <div className="col-12 col-md-6 col-xl-3" key={item.id}>
                 <div
-                  className={`kg-guarantee-bar-item h-100 ${
+                  className={`home-guarantee-item h-100 ${
                     index !== guarantees.length - 1
-                      ? "kg-guarantee-divider"
+                      ? "home-guarantee-divider"
                       : ""
                   }`}
                 >
-                  <div className="kg-guarantee-bar-icon">
+                  <div className="home-guarantee-icon">
                     <i className={item.icon}></i>
                   </div>
 
-                  <div className="kg-guarantee-bar-content">
-                    <h3 className="kg-guarantee-bar-title">{item.title}</h3>
-                    <p className="kg-guarantee-bar-desc mb-0">{item.desc}</p>
+                  <div className="home-guarantee-content">
+                    <h3 className="home-guarantee-title">{item.title}</h3>
+                    <p className="home-guarantee-desc mb-0">{item.desc}</p>
                   </div>
                 </div>
               </div>

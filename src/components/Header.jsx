@@ -1,92 +1,125 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router";
+import { Link, NavLink, useSearchParams } from "react-router";
 import { createAsyncGetCart } from "../slice/cartSlice";
 import { homeContent } from "../data/homeContent";
+import "../styles/header.css";
 
 export default function Header() {
   const carts = useSelector((state) => state.cart.carts);
   const dispatch = useDispatch();
-  const { logoSVG } = homeContent.navbar;
+  const { logoSVG_white } = homeContent.navbar;
+  const [searchParams] = useSearchParams();
+  const currentCategory = searchParams.get("category");
+
   useEffect(() => {
     dispatch(createAsyncGetCart());
   }, [dispatch]);
+
+  const categoryLinks = [
+    { name: "全部商品", to: "/product", category: null },
+    {
+      name: "乳清蛋白",
+      to: "/product?category=乳清蛋白",
+      category: "乳清蛋白",
+    },
+    {
+      name: "訓練補給",
+      to: "/product?category=訓練補給",
+      category: "訓練補給",
+    },
+    {
+      name: "訓練用品",
+      to: "/product?category=訓練用品",
+      category: "訓練用品",
+    },
+    {
+      name: "保健食品",
+      to: "/product?category=保健食品",
+      category: "保健食品",
+    },
+  ];
+
   return (
-    <div className="bg-white sticky-top">
+    <header className="kging-header sticky-top">
       <div className="container">
-        <nav className="navbar px-0 navbar-expand-lg navbar-light bg-white">
-          <Link
-            className="navbar-brand position-absolute"
-            to="/"
-            style={{
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              top: "50%",
-            }}
-          >
+        <nav className="navbar navbar-expand-lg kging-navbar px-0">
+          <Link className="navbar-brand kging-navbar-brand d-lg-none" to="/">
             <img
-              src={logoSVG.imageUrl}
+              src={logoSVG_white.imageUrl}
               alt="KGING Logo"
-              style={{ width: "10rem", height: "auto", display: "block" }}
+              className="kging-navbar-logo"
             />
           </Link>
+
           <button
-            className="navbar-toggler"
+            className="navbar-toggler kging-navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
+            data-bs-target="#kgingNavbar"
+            aria-controls="kgingNavbar"
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon"></span>
           </button>
+
           <div
-            className="collapse navbar-collapse bg-white custom-header-md-open"
-            id="navbarNav"
+            className="collapse navbar-collapse kging-navbar-collapse"
+            id="kgingNavbar"
           >
-            <ul className="navbar-nav">
-              <li className="nav-item active">
-                <Link className="nav-link ps-0" to="/product">
-                  全部商品
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/product/23">
-                  詳細
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/product/23">
-                  乳清蛋白
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/product/23">
-                  運動配件
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/product/23">
-                  關於品牌
-                </Link>
-              </li>
+            <ul className="navbar-nav kging-nav-left">
+              {categoryLinks.map((item) => {
+                const isActive =
+                  item.category === null
+                    ? currentCategory === null
+                    : currentCategory === item.category;
+
+                return (
+                  <li className="nav-item" key={item.name}>
+                    <Link
+                      to={item.to}
+                      className={`nav-link kging-nav-link ${
+                        isActive ? "active" : ""
+                      }`}
+                    >
+                      {item.name}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
-          </div>
-          <div className="d-flex">
-            <a href="#">
-              <i className="fas fa-heart me-5"></i>
-            </a>
-            <Link to="/cart" className="position-relative">
-              <i className="fas fa-shopping-cart"></i>
-              <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                {carts.length}
-                {/* <span className="visually-hidden">unread messages</span> */}
-              </span>
-            </Link>
+
+            <div className="kging-navbar-center d-none d-lg-flex">
+              <Link className="kging-navbar-brand" to="/">
+                <img
+                  src={logoSVG_white.imageUrl}
+                  alt="KGING Logo"
+                  className="kging-navbar-logo"
+                />
+              </Link>
+            </div>
+
+            <div className="kging-navbar-actions">
+              <Link
+                to="/favorite"
+                className="kging-header-icon-btn"
+                aria-label="Wishlist"
+              >
+                <i className="fas fa-heart"></i>
+              </Link>
+              <Link
+                to="/cart"
+                className="kging-header-icon-btn kging-cart-link"
+                aria-label="Shopping cart"
+              >
+                <i className="fas fa-shopping-cart"></i>
+                <span className="kging-cart-badge">{carts.length}</span>
+              </Link>
+            </div>
           </div>
         </nav>
       </div>
-    </div>
+    </header>
   );
 }

@@ -27,13 +27,14 @@ export default function Home_BrandFeature() {
       desc: "不只是商品，更是一種自律、穩定、持續進步的狀態。",
     },
   ];
+
   return (
-    <section className="home-brand-feature py-5 py-lg-6">
+    <section className="home-brand-feature-section kging-section">
       <div className="container">
-        <div className="text-center section-heading mb-4 mb-lg-5">
-          <span className="section-subtitle">WHY KGING</span>
-          <h2 className="section-title mt-2">品牌特色</h2>
-          <p className="section-text mb-0">
+        <div className="kging-section-heading text-center home-brand-feature-heading">
+          <p className="kging-section-label">WHY KGING</p>
+          <h2 className="kging-section-title">品牌特色</h2>
+          <p className="kging-section-desc mx-auto">
             專注運動補給與健康日常，提供更有品質感的選擇
           </p>
         </div>
@@ -41,12 +42,16 @@ export default function Home_BrandFeature() {
         <div className="row g-4">
           {features.map((feature) => (
             <div className="col-12 col-md-6 col-lg-3" key={feature.id}>
-              <div className="brand-feature-card h-100 text-center">
-                <div className="brand-feature-icon">
-                  <i className={feature.icon}></i>
+              <div className="kging-card home-brand-feature-card h-100 text-center">
+                <div className="kging-card-body home-brand-feature-body">
+                  <div className="home-brand-feature-icon">
+                    <i className={feature.icon}></i>
+                  </div>
+
+                  <h3 className="home-brand-feature-title">{feature.title}</h3>
+
+                  <p className="home-brand-feature-desc mb-0">{feature.desc}</p>
                 </div>
-                <h3 className="brand-feature-title">{feature.title}</h3>
-                <p className="brand-feature-desc mb-0">{feature.desc}</p>
               </div>
             </div>
           ))}

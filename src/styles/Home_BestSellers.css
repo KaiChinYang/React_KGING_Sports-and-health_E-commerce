@@ -1,24 +1,229 @@
-/* 熱銷商品 */
-.best-sellers {
-    background-color: #f8f9fa;
+.home-best-sellers {
+    background:
+        radial-gradient(circle at top center, rgba(212, 175, 55, 0.06), transparent 24%),
+        linear-gradient(180deg, #0b0b0b 0%, #101010 100%);
 }
 
-.best-sellers .card {
-    border-radius: 16px;
+.home-best-sellers-heading {
+    margin-bottom: 40px;
+}
+
+.home-best-link {
+    display: block;
+    height: 100%;
+    color: inherit;
+}
+
+.home-best-link:focus-visible {
+    outline: none;
+}
+
+.home-best-card {
+    position: relative;
     overflow: hidden;
-    transition: all 0.3s ease;
+    border-radius: 24px;
+    background: linear-gradient(145deg, rgba(18, 18, 18, 0.96), rgba(32, 32, 32, 0.92));
+    border: 1px solid rgba(212, 175, 55, 0.16);
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease,
+        border-color 0.4s ease;
 }
 
-.best-sellers .card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+.home-best-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.06) 0%,
+            rgba(212, 175, 55, 0.08) 35%,
+            rgba(212, 175, 55, 0.02) 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 1;
 }
 
-.best-sellers .card-img-top {
-    height: 240px;
-    object-fit: cover;
+.home-best-card::after {
+    content: "";
+    position: absolute;
+    top: -120%;
+    left: -60%;
+    width: 70%;
+    height: 300%;
+    background: linear-gradient(120deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.05) 45%,
+            rgba(212, 175, 55, 0.18) 50%,
+            rgba(255, 255, 255, 0.04) 55%,
+            transparent 100%);
+    transform: rotate(18deg);
+    transition: left 0.8s ease;
+    pointer-events: none;
+    z-index: 2;
 }
 
-.best-sellers .btn {
+.home-best-link:hover .home-best-card,
+.home-best-link:focus-visible .home-best-card {
+    transform: translateY(-10px) scale(1.02);
+    border-color: rgba(212, 175, 55, 0.42);
+    box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.42),
+        0 0 24px rgba(212, 175, 55, 0.12);
+}
+
+.home-best-link:hover .home-best-card::before,
+.home-best-link:focus-visible .home-best-card::before {
+    opacity: 1;
+}
+
+.home-best-link:hover .home-best-card::after,
+.home-best-link:focus-visible .home-best-card::after {
+    left: 120%;
+}
+
+.home-best-badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 4;
+    padding: 0.4rem 0.75rem;
     border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #f5d97a, #d4af37, #8c6b15);
+    color: #111;
+    box-shadow: 0 6px 18px rgba(212, 175, 55, 0.28);
+}
+
+.kging-product-image-wrap {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px 20px 0 0;
+}
+
+.kging-product-image {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    display: block;
+    transition:
+        transform 0.5s ease,
+        filter 0.5s ease;
+}
+
+.home-best-link:hover .kging-product-image,
+.home-best-link:focus-visible .kging-product-image {
+    transform: scale(1.08);
+    filter: brightness(1.05) contrast(1.04);
+}
+
+.home-best-image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.38),
+            rgba(0, 0, 0, 0.08),
+            transparent);
+    pointer-events: none;
+}
+
+.kging-card-body {
+    position: relative;
+    z-index: 3;
+}
+
+.home-best-title {
+    min-height: 52px;
+    color: #f8f5ee;
+    transition: color 0.3s ease;
+}
+
+.home-best-link:hover .home-best-title,
+.home-best-link:focus-visible .home-best-title {
+    color: #f5d97a;
+}
+
+.home-best-desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 52px;
+    color: rgba(255, 255, 255, 0.72);
+    line-height: 1.7;
+}
+
+.home-best-footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.home-best-btn {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    border-radius: 999px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    background: linear-gradient(135deg, #d4af37, #f5d97a);
+    color: #111;
+    box-shadow:
+        0 8px 20px rgba(212, 175, 55, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        opacity 0.3s ease;
+}
+
+.home-best-link:hover .home-best-btn,
+.home-best-link:focus-visible .home-best-btn {
+    transform: translateY(-2px);
+    box-shadow:
+        0 10px 24px rgba(212, 175, 55, 0.24),
+        inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+.home-best-empty {
+    margin-top: 40px;
+    padding: 48px 24px;
+    color: var(--kging-text-muted);
+}
+
+@media (max-width: 991px) {
+    .kging-product-image {
+        height: 240px;
+    }
+}
+
+@media (max-width: 767px) {
+    .home-best-sellers-heading {
+        margin-bottom: 32px;
+    }
+
+    .home-best-title {
+        min-height: auto;
+    }
+
+    .home-best-desc {
+        min-height: auto;
+    }
+
+    .home-best-card {
+        border-radius: 20px;
+    }
+
+    .kging-product-image {
+        height: 220px;
+    }
 }

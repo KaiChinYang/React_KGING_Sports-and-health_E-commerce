@@ -1,0 +1,143 @@
+.kging-loading-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.kging-loading-overlay__backdrop {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at top, rgba(212, 175, 55, 0.08), transparent 35%),
+        linear-gradient(135deg,
+            rgba(8, 8, 8, 0.82),
+            rgba(16, 16, 16, 0.9),
+            rgba(8, 8, 8, 0.88));
+    backdrop-filter: blur(8px);
+}
+
+.kging-loading-card {
+    position: relative;
+    z-index: 2;
+    width: min(92vw, 420px);
+    padding: 36px 28px 30px;
+    border-radius: 28px;
+    text-align: center;
+    overflow: hidden;
+    background: linear-gradient(180deg,
+            rgba(28, 28, 28, 0.88),
+            rgba(15, 15, 15, 0.94));
+    border: 1px solid rgba(212, 175, 55, 0.22);
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06),
+        inset 0 0 40px rgba(212, 175, 55, 0.04);
+    backdrop-filter: blur(18px);
+}
+
+.kging-loading-card__ring {
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 999px;
+    background: radial-gradient(circle,
+            rgba(212, 175, 55, 0.18) 0%,
+            rgba(212, 175, 55, 0.08) 35%,
+            rgba(212, 175, 55, 0) 70%);
+    pointer-events: none;
+}
+
+.kging-loading-card__spinner {
+    position: relative;
+    z-index: 2;
+    width: 104px;
+    height: 104px;
+    margin: 0 auto 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01)),
+        rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(212, 175, 55, 0.18);
+    box-shadow:
+        inset 0 0 20px rgba(212, 175, 55, 0.05),
+        0 0 30px rgba(212, 175, 55, 0.08);
+}
+
+.kging-loading-card__eyebrow {
+    position: relative;
+    z-index: 2;
+    color: #d4af37;
+    font-size: 12px;
+    letter-spacing: 2.4px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.kging-loading-card__title {
+    position: relative;
+    z-index: 2;
+    color: #fff7da;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+.kging-loading-card__text {
+    position: relative;
+    z-index: 2;
+    color: rgba(255, 244, 214, 0.78);
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+.kging-loading-card::before {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    border-radius: 27px;
+    pointer-events: none;
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.08),
+            rgba(255, 255, 255, 0.01) 30%,
+            rgba(212, 175, 55, 0.04) 100%);
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    padding: 1px;
+    mask-composite: exclude;
+    -webkit-mask-composite: xor;
+}
+
+@media (max-width: 576px) {
+    .kging-loading-card {
+        padding: 28px 20px 24px;
+        border-radius: 24px;
+    }
+
+    .kging-loading-card__spinner {
+        width: 90px;
+        height: 90px;
+        margin-bottom: 18px;
+    }
+
+    .kging-loading-card__title {
+        font-size: 1.25rem;
+    }
+
+    .kging-loading-card__text {
+        font-size: 0.9rem;
+    }
+}

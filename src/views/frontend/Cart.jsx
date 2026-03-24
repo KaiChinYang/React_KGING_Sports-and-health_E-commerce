@@ -1,115 +1,250 @@
 import { useSelector, useDispatch } from "react-redux";
-import {currency} from "../../utils/filter";
-import {createAsyncDeleteCart} from "../../slice/cartSlice";
+import { Link, useNavigate } from "react-router";
+import { currency } from "../../utils/filter";
+import {
+  createAsyncDeleteCart,
+  createAsyncUpdateCartQty,
+} from "../../slice/cartSlice";
+import "../../styles/cart.css";
+import LoadingOverlay from "../../components/LoadingOverlay";
+import { useState } from "react";
 
 function Cart() {
   const carts = useSelector((state) => state.cart.carts);
   const dispatch = useDispatch();
-  function handleRemoveCart(e,id){
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+
+  async function handleRemoveCart(e, id) {
     e.preventDefault();
-    dispatch(createAsyncDeleteCart(id));
+    setIsLoading(true);
+    try {
+      await dispatch(createAsyncDeleteCart(id));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
   }
+  function handleToCheckout() {
+    navigate("/checkout");
+  }
+
+  async function handleUpdateQty(cartId, productId, qty) {
+    if (qty < 1) return;
+    setIsLoading(true);
+    try {
+      await dispatch(createAsyncUpdateCartQty({ cartId, productId, qty }));
+    } catch (error) {
+      console.log(error);
+    } finally{
+      setIsLoading(false);
+    }
+  }
+
+  const subtotal = carts.reduce((sum, item) => {
+    return sum + item.product.price * item.qty;
+  }, 0);
+
+  //  運費 xx
+  const shippingFee = subtotal >= 1500 ? 0 : 0; // 先保留假資料邏輯
+  const total = subtotal + shippingFee;
+
   return (
-    <div className="container">
-      <div className="row justify-content-center">
-        <div
-          className="col-md-6 bg-white py-5"
-          style={{
-            minHeight: "min-height: calc(100vh - 56px - 76px)",
-          }}
-        >
-          <div className="d-flex justify-content-between">
-            <h2 className="mt-2">Cart Detail</h2>
-          </div>
-          {carts?.map((item) => (
-            <div key={item.id} className="d-flex mt-4 bg-light">
-              <img
-                src={item.product.imageUrl}
-                alt=""
-                style={{
-                  width: "120px",
-                  height: "120px",
-                  objectFit: "cover",
-                }}
-              />
-              <div className="w-100 p-3 position-relative">
-                <a
-                  href="#"
-                  className="position-absolute"
-                  style={{
-                    top: "16px",
-                    right: "16px",
-                  }}
-                  onClick={e=>handleRemoveCart(e,item.id)}
-                >
-                  <i className="fas fa-times"></i>
-                </a>
-                <p className="mb-0 fw-bold">{item.product.title}</p>
-                <p className="mb-1 text-muted" style={{ fontSize: "14px" }}>
-                  {item.product.description}
+    <>
+      <div
+        className={`kging-page-loading-content ${isLoading ? "is-loading" : ""}`}
+      >
+        <div className="kging-page">
+          <section className="cart-hero">
+            <div className="container text-center">
+              <div className="kging-section-heading mb-0">
+                <p className="kging-section-label">KGING CART</p>
+                <h1 className="kging-section-title">購物車資訊</h1>
+                <p className="kging-section-desc mx-auto">
+                  請查看你所選擇的商品並且結帳完成購買
                 </p>
-                <div className="d-flex justify-content-between align-items-center w-100">
-                  <div className="input-group w-50 align-items-center">
-                    <div className="input-group-prepend pe-1">
-                      <a href="#">
-                        {" "}
-                        <i className="fas fa-minus"></i>
-                      </a>
-                    </div>
-                    <input
-                      type="text"
-                      className="form-control border-0 text-center my-auto shadow-none bg-light px-0"
-                      placeholder=""
-                      aria-label="Example text with button addon"
-                      aria-describedby="button-addon1"
-                      value="1"
-                    />
-                    <div className="input-group-append ps-1">
-                      <a href="#">
-                        <i className="fas fa-plus"></i>
-                      </a>
+              </div>
+            </div>
+          </section>
+
+          <section className="kging-section cart-section">
+            <div className="container">
+              <div className="row g-4 justify-content-center">
+                <div className="col-xl-8">
+                  <div className="kging-card cart-main-card">
+                    <div className="kging-card-body">
+                      <div className="cart-header">
+                        <h2 className="cart-title mb-0">Shopping Cart</h2>
+                        <span className="cart-count">
+                          {carts?.length || 0} 件商品
+                        </span>
+                      </div>
+
+                      {carts?.length > 0 ? (
+                        <div className="cart-list">
+                          {carts.map((item) => (
+                            <div key={item.id} className="cart-item">
+                              <div className="cart-item-image-wrap">
+                                <img
+                                  src={item.product.imageUrl}
+                                  alt={item.product.title}
+                                  className="cart-item-image"
+                                />
+                              </div>
+
+                              <div className="cart-item-content">
+                                <button
+                                  type="button"
+                                  className="cart-remove-btn"
+                                  onClick={(e) => handleRemoveCart(e, item.id)}
+                                  aria-label="Remove item"
+                                >
+                                  <i className="fas fa-times"></i>
+                                </button>
+
+                                <p className="kging-product-category mb-2">
+                                  {item.product.category || "KGING"}
+                                </p>
+
+                                <h3 className="cart-item-title">
+                                  {item.product.title}
+                                </h3>
+
+                                <p className="cart-item-desc">
+                                  {item.product.description}
+                                </p>
+
+                                <div className="cart-item-footer">
+                                  <div className="input-group kging-qty-group cart-qty-group">
+                                    <button
+                                      className="btn kging-qty-btn"
+                                      type="button"
+                                      onClick={() => {
+                                        handleUpdateQty(
+                                          item.id,
+                                          item.product_id,
+                                          item.qty - 1,
+                                        );
+                                      }}
+                                      disabled={item.qty <= 1}
+                                    >
+                                      <i className="fas fa-minus"></i>
+                                    </button>
+
+                                    <input
+                                      type="text"
+                                      className="form-control kging-qty-input"
+                                      value={item.qty}
+                                      onChange={(e) => {
+                                        handleUpdateQty(
+                                          item.id,
+                                          item.product_id,
+                                          Number(e.target.value),
+                                        );
+                                      }}
+                                    />
+
+                                    <button
+                                      className="btn kging-qty-btn"
+                                      type="button"
+                                      onClick={() => {
+                                        handleUpdateQty(
+                                          item.id,
+                                          item.product_id,
+                                          item.qty + 1,
+                                        );
+                                      }}
+                                    >
+                                      <i className="fas fa-plus"></i>
+                                    </button>
+                                  </div>
+
+                                  <div className="text-end">
+                                    <p className="cart-item-price mb-1">
+                                      NT$ {currency(item.product.price)}
+                                    </p>
+                                    <p className="cart-item-subtotal mb-0">
+                                      小計 NT${" "}
+                                      {currency(item.product.price * item.qty)}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="cart-empty-state text-center">
+                          <h3 className="mb-3">您的購物車是空的</h3>
+                          <p className="mb-4">
+                            探索KGING，讓自己成為身體的KING
+                          </p>
+                          <Link
+                            to="/product"
+                            className="kging-btn kging-btn-primary"
+                          >
+                            購物去
+                          </Link>
+                        </div>
+                      )}
                     </div>
                   </div>
-                  <p className="mb-0 ms-auto">
-                    NT{currency(item.product.price)}
-                  </p>
+                </div>
+
+                <div className="col-xl-4">
+                  <div className="kging-card cart-summary-card">
+                    <div className="kging-card-body">
+                      <h3 className="cart-summary-title">Order Summary</h3>
+
+                      <table className="table cart-summary-table mb-0">
+                        <tbody>
+                          <tr>
+                            <th scope="row">商品小計</th>
+                            <td className="text-end">
+                              NT$ {currency(subtotal)}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                      <div className="cart-summary-total">
+                        <p className="mb-0">總計</p>
+                        <p className="mb-0">NT$ {currency(total)}</p>
+                      </div>
+
+                      <div className="d-grid gap-3 mt-4">
+                        <button
+                          className="kging-btn kging-btn-primary cart-checkout-btn"
+                          disabled={carts?.length === 0 ? true : false}
+                          onClick={() => handleToCheckout()}
+                        >
+                          前往結帳
+                        </button>
+
+                        <Link
+                          to="/product"
+                          className="kging-btn kging-btn-secondary"
+                        >
+                          繼續逛逛其他商品
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          ))}
-
-          <table className="table mt-4 text-muted">
-            <tbody>
-              <tr>
-                <th scope="row" className="border-0 px-0 font-weight-normal">
-                  Lorem ipsum
-                </th>
-                <td className="text-end border-0 px-0">NT$24,000</td>
-              </tr>
-              <tr>
-                <th
-                  scope="row"
-                  className="border-0 px-0 pt-0 font-weight-normal"
-                >
-                  Lorem ipsum
-                </th>
-                <td className="text-end border-0 px-0 pt-0">NT$500</td>
-              </tr>
-            </tbody>
-          </table>
-          <div className="d-flex justify-content-between mt-4">
-            <p className="mb-0 h4 fw-bold">Lorem ipsum</p>
-            <p className="mb-0 h4 fw-bold">NT$24,500</p>
-          </div>
-          <a
-            href="./checkout.html"
-            className="btn btn-dark btn-block mt-4 rounded-0 py-3"
-          >
-            Lorem ipsum
-          </a>
+          </section>
         </div>
       </div>
-    </div>
+      <LoadingOverlay
+        isOpen={isLoading}
+        eyebrow="KGING PROCESSING"
+        title="資料處理中"
+        text="正在同步你的購物車與訂單資訊，請稍候。"
+      />
+    </>
   );
 }
+
 export default Cart;

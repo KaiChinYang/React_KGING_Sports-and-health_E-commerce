@@ -1,69 +1,96 @@
-import { homeContent } from "../data/homeContent";
+import { useCallback, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router";
+import { getAllProductsApi } from "../services/products";
+import { currency } from "../utils/filter";
 import "../styles/Home_BestSellers.css";
-export default function Home_BestSellers() {
-  const { hero } = homeContent;
 
-  const bestSellerProducts = [
-    {
-      id: 1,
-      title: "原味乳清蛋白",
-      desc: "高蛋白、低負擔，適合日常補充。",
-      price: 1280,
-      image: hero[0].imageUrl,
-    },
-    {
-      id: 2,
-      title: "草莓乳清蛋白",
-      desc: "香甜順口，補充蛋白質更輕鬆。",
-      price: 1280,
-      image: hero[0].imageUrl,
-    },
-    {
-      id: 3,
-      title: "巧克力乳清蛋白",
-      desc: "經典風味，健身後補充首選。",
-      price: 1280,
-      image: hero[0].imageUrl,
-    },
-    {
-      id: 4,
-      title: "健身搖搖杯",
-      desc: "外出攜帶方便，日常補給更簡單。",
-      price: 399,
-      image: hero[0].imageUrl,
-    },
-  ];
+export default function Home_BestSellers() {
+  const [starProducts, setStarProducts] = useState([]);
+  const navigate = useNavigate();
+
+  const getStarProducts = useCallback(async () => {
+    try {
+      const res = await getAllProductsApi();
+      const result = res.data.products.filter((item) => item.star === true);
+      setStarProducts(result);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  useEffect(() => {
+    getStarProducts();
+  }, [getStarProducts]);
+
+  function handleViewProduct(id) {
+    navigate(`/product/${id}`);
+  }
+
   return (
-    <section className="best-sellers py-5">
+    <section className="home-best-sellers kging-section">
       <div className="container">
-        <div className="text-center mb-5">
-          <h2 className="fw-bold">熱銷商品</h2>
-          <p className="text-muted mb-0">
+        <div className="kging-section-heading text-center home-best-sellers-heading">
+          <p className="kging-section-label">BEST SELLERS</p>
+          <h2 className="kging-section-title">熱銷商品</h2>
+          <p className="kging-section-desc mx-auto">
             最多人選購的人氣商品，快速找到你的日常補給
           </p>
         </div>
 
         <div className="row g-4">
-          {bestSellerProducts.map((product) => (
+          {starProducts.map((product) => (
             <div className="col-12 col-sm-6 col-lg-3" key={product.id}>
-              <div className="card h-100 border-0 shadow-sm">
-                <img
-                  src={product.image}
-                  className="card-img-top"
-                  alt={product.title}
-                />
-                <div className="card-body d-flex flex-column">
-                  <h5 className="card-title fw-bold">{product.title}</h5>
-                  <p className="card-text text-muted small">{product.desc}</p>
-                  <p className="fs-5 fw-bold text-dark mb-3">
-                    NT$ {product.price}
-                  </p>
-                  <button className="btn btn-dark mt-auto">查看商品</button>
+              <Link
+                to={`/product/${product.id}`}
+                className="home-best-link text-decoration-none"
+              >
+                <div className="kging-card h-100 home-best-card">
+                  <div className="kging-product-image-wrap">
+                    <img
+                      src={product.imageUrl}
+                      className="kging-product-image"
+                      alt={product.title}
+                    />
+                    <span className="kging-badge home-best-badge">Hot</span>
+                    <div className="home-best-overlay"></div>
+                  </div>
+
+                  <div className="kging-card-body d-flex flex-column">
+                    <p className="kging-product-category mb-2">
+                      {product.category || "KGING"}
+                    </p>
+
+                    <h3 className="kging-product-title home-best-title">
+                      {product.title}
+                    </h3>
+
+                    <p className="kging-product-text home-best-desc">
+                      {product.description ||
+                        "Premium sports nutrition and fitness essentials."}
+                    </p>
+
+                    <div className="home-best-footer mt-auto">
+                      <p className="kging-product-price mb-0">
+                        NT$ {currency(product.price)}
+                      </p>
+
+                      <span className="kging-btn kging-btn-primary home-best-btn">
+                        查看商品
+                      </span>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </Link>
             </div>
           ))}
         </div>
+
+        {starProducts.length === 0 && (
+          <div className="kging-card home-best-empty text-center">
+            <h3 className="mb-3">目前尚無熱銷商品</h3>
+            <p className="mb-0">請稍後再回來看看最新人氣商品。</p>
+          </div>
+        )}
       </div>
     </section>
   );

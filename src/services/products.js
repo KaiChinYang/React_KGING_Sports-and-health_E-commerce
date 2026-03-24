@@ -12,3 +12,7 @@ export const getProductsApi = (page = 1, category) => {
 export const getAllProductsApi = () => {
   return api.get(`/api/${API_PATH}/products/all`);
 };
+
+export const getSingleProductsApi = (productId) => {
+  return api.get(`/api/${API_PATH}/product/${productId}`);
+};
