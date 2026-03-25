@@ -20,7 +20,6 @@ function CheckoutSuccess() {
       const order = unwrapResult(
         await dispatch(createAsyncGetSingleOrder(orderId)),
       );
-      console.log(order);
       setOrderInfo({
         orderId: order.id,
         name: order.user?.name || "",

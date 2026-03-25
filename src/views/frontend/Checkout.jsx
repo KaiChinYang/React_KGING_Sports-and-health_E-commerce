@@ -78,7 +78,6 @@ function Checkout() {
   }
 
   async function onSubmit(formData) {
-    console.log(formData);
     const data = {
       user: formData,
       message: formData.message,

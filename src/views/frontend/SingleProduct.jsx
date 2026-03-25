@@ -74,7 +74,6 @@ function SingleProduct() {
       setIsLoading(true);
       try {
         const res = await getSingleProductsApi(productId);
-        console.log(res.data);
         setProduct(res.data.product);
       } catch (error) {
         console.log(error);
