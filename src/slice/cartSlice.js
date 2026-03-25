@@ -61,7 +61,7 @@ export const createAsyncAddCart = createAsyncThunk(
         product_id: id,
         qty,
       };
-      const res = await addToCartApi(data);
+      await addToCartApi(data);
       //重新取得資料
       dispatch(createAsyncGetCart());
 
@@ -87,7 +87,7 @@ export const createAsyncDeleteCart = createAsyncThunk(
   "cart/createAsyncDeleteCart",
   async (id, { dispatch }) => {
     try {
-      const res = await deleteSingleCartQtyApi(id);
+      await deleteSingleCartQtyApi(id);
       //重新取得資料
       dispatch(createAsyncGetCart());
       dispatch(
@@ -111,7 +111,7 @@ export const createAsyncClearCart = createAsyncThunk(
   "cart/createAsyncClearCart",
   async (_, { dispatch }) => {
     try {
-      const res = await clearCartQtyApi();
+      await clearCartQtyApi();
       //重新取得資料
       dispatch(createAsyncGetCart());
       dispatch(
@@ -216,7 +216,7 @@ export const createAsyncPayOrder = createAsyncThunk(
   "cart/createAsyncPayOrder",
   async (orderId, { dispatch }) => {
     try {
-      const res = await payOrderApi(orderId);
+      await payOrderApi(orderId);
       // return res.data.order;
       dispatch(
         createAsyncMessage({

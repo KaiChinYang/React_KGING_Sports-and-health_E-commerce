@@ -1,30 +1,37 @@
-import { useCallback, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router";
+import {  useEffect, useState } from "react";
+import { Link } from "react-router";
 import { getAllProductsApi } from "../services/products";
 import { currency } from "../utils/filter";
 import "../styles/Home_BestSellers.css";
 
 export default function Home_BestSellers() {
   const [starProducts, setStarProducts] = useState([]);
-  const navigate = useNavigate();
 
-  const getStarProducts = useCallback(async () => {
-    try {
-      const res = await getAllProductsApi();
-      const result = res.data.products.filter((item) => item.star === true);
-      setStarProducts(result);
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+  // const getStarProducts = useCallback(async () => {
+  //   try {
+  //     const res = await getAllProductsApi();
+  //     const result = res.data.products.filter((item) => item.star === true);
+  //     setStarProducts(result);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }, []);
 
+  // useEffect(() => {
+  //   getStarProducts();
+  // }, [getStarProducts]);
   useEffect(() => {
+    async function getStarProducts() {
+      try {
+        const res = await getAllProductsApi();
+        const result = res.data.products.filter((item) => item.star === true);
+        setStarProducts(result);
+      } catch (error) {
+        console.log(error);
+      }
+    }
     getStarProducts();
-  }, [getStarProducts]);
-
-  function handleViewProduct(id) {
-    navigate(`/product/${id}`);
-  }
+  }, []);
 
   return (
     <section className="home-best-sellers kging-section">

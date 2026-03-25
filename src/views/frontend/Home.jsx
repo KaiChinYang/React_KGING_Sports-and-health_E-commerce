@@ -7,7 +7,6 @@ import {
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { homeContent } from "../../data/homeContent"; 
 import Home_Hero from "../../components/Home_Hero";
 import Home_BestSellers from "../../components/Home_BestSellers";
 import Home_ProductList from "../../components/Home_ProductList";
@@ -16,10 +15,6 @@ import Home_Promo from "../../components/Home_Promo";
 import Home_GuaranteeBar from "../../components/Home_GuaranteeBar";
 
 export default function Home() {
-  const { hero } = homeContent;
-  
-  
-
   return (
     <>
       {/* 首頁HERO */}

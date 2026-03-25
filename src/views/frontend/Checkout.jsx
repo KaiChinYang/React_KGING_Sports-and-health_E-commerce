@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState  } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   createAsyncDeleteCart,
@@ -19,13 +19,13 @@ function Checkout() {
   const navigate = useNavigate();
   const carts = useSelector((state) => state.cart.carts);
   const final_total = useSelector((state) => state.cart.final_total);
-  const subtotal = final_total || 0;
-  const shippingFee = subtotal > 1500 ? 0 : 60;
-  const orderTotal = carts?.length ? subtotal + shippingFee : 0;
+  // const subtotal = final_total || 0;
+  // const shippingFee = subtotal > 1500 ? 0 : 60;
+  // const orderTotal = carts?.length ? subtotal + shippingFee : 0;
 
   const dispatch = useDispatch();
 
-  const [loadingProductId, setLoadingProductId] = useState(null);
+  // const [loadingProductId, setLoadingProductId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
  
 
@@ -38,27 +38,27 @@ function Checkout() {
 
   async function handleUpdateQty(cartId, productId, qty) {
     if (qty < 1 || Number.isNaN(qty)) return;
-    setLoadingProductId(cartId);
+    // setLoadingProductId(cartId);
     setIsLoading(true);
     try {
       await dispatch(createAsyncUpdateCartQty({ cartId, productId, qty }));
     } catch (error) {
       console.log(error);
     } finally {
-      setLoadingProductId(null);
+      // setLoadingProductId(null);
       setIsLoading(false);
     }
   }
 
   async function deleteCart(cartId) {
-    setLoadingProductId(cartId);
+    // setLoadingProductId(cartId);
     setIsLoading(true);
     try {
       await dispatch(createAsyncDeleteCart(cartId));
     } catch (error) {
       console.log(error);
     } finally {
-      setLoadingProductId(null);
+      // setLoadingProductId(null);
       setIsLoading(false);
     }
   }

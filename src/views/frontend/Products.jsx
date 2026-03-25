@@ -5,7 +5,6 @@ import { getAllProductsApi, getProductsApi } from "../../services/products";
 import { getFavorites, toggleFavorite } from "../../utils/favorite";
 import Pagination from "../../components/Pagination";
 import "../../styles/Products.css";
-import { set } from "react-hook-form";
 import LoadingOverlay from "../../components/LoadingOverlay";
 
 const Products = () => {

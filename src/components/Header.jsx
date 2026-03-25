@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, NavLink, useSearchParams } from "react-router";
+import { Link, useSearchParams } from "react-router";
 import { createAsyncGetCart } from "../slice/cartSlice";
 import { homeContent } from "../data/homeContent";
+import { Collapse } from "bootstrap";
 import "../styles/header.css";
 
 export default function Header() {
@@ -11,6 +12,19 @@ export default function Header() {
   const { logoSVG_white } = homeContent.navbar;
   const [searchParams] = useSearchParams();
   const currentCategory = searchParams.get("category");
+
+   const closeNavbar = () => {
+     const navbar = document.getElementById("kgingNavbar");
+     if (!navbar) return;
+
+     const bsCollapse =
+       Collapse.getInstance(navbar) ||
+       new Collapse(navbar, {
+         toggle: false,
+       });
+
+     bsCollapse.hide();
+   };
 
   useEffect(() => {
     dispatch(createAsyncGetCart());
@@ -79,6 +93,7 @@ export default function Header() {
                   <li className="nav-item" key={item.name}>
                     <Link
                       to={item.to}
+                      onClick={closeNavbar}
                       className={`nav-link kging-nav-link ${
                         isActive ? "active" : ""
                       }`}
@@ -103,6 +118,7 @@ export default function Header() {
             <div className="kging-navbar-actions">
               <Link
                 to="/favorite"
+                onClick={closeNavbar}
                 className="kging-header-icon-btn"
                 aria-label="Wishlist"
               >
@@ -110,6 +126,7 @@ export default function Header() {
               </Link>
               <Link
                 to="/cart"
+                onClick={closeNavbar}
                 className="kging-header-icon-btn kging-cart-link"
                 aria-label="Shopping cart"
               >
