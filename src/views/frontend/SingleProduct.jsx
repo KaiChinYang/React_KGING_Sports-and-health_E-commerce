@@ -32,10 +32,17 @@ function SingleProduct() {
       setIsLoading(false);
     }
   }
-  function handleBuyNow(e, id, qty) {
+  async function handleBuyNow(e, id, qty) {
     e.preventDefault();
-    handleAddCart(e, id, qty);
-    navigate("/checkout");
+    setIsLoading(true);
+    try {
+      await handleAddCart(e, id, qty);
+      navigate("/checkout");
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   function handleIncreaseQty() {
@@ -107,9 +114,13 @@ function SingleProduct() {
                   <div className="kging-card single-gallery-card">
                     <div
                       className="single-main-image"
-                      style={{
-                        backgroundImage: `url(${product.imageUrl})`,
-                      }}
+                      style={
+                        product.imageUrl
+                          ? {
+                              backgroundImage: `url(${product.imageUrl})`,
+                            }
+                          : {}
+                      }
                     ></div>
                   </div>
 
