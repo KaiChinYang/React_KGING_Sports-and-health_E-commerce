@@ -3,15 +3,29 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useSearchParams } from "react-router";
 import { createAsyncGetCart } from "../slice/cartSlice";
 import { homeContent } from "../data/homeContent";
+// import { Collapse } from "bootstrap";
 import "../styles/header.css";
 
 export default function Header() {
-  const carts = useSelector((state) => state.cart.carts || []);
+  const carts = useSelector((state) => state.cart.carts);
   const dispatch = useDispatch();
   const { logoSVG_white } = homeContent.navbar;
   const [searchParams] = useSearchParams();
   const currentCategory = searchParams.get("category");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  //  const closeNavbar = () => {
+  //    const navbar = document.getElementById("kgingNavbar");
+  //    if (!navbar) return;
+
+  //    const bsCollapse =
+  //      Collapse.getInstance(navbar) ||
+  //      new Collapse(navbar, {
+  //        toggle: false,
+  //      });
+
+  //    bsCollapse.hide();
+  //  };
 
   useEffect(() => {
     dispatch(createAsyncGetCart());
@@ -53,40 +67,39 @@ export default function Header() {
     <header className="kging-header sticky-top">
       <div className="container">
         <nav className="navbar navbar-expand-lg kging-navbar px-0">
-          <div className="kging-navbar-topbar">
-            <Link
-              className="navbar-brand kging-navbar-brand d-lg-none"
-              to="/"
-              onClick={handleCloseMenu}
-            >
-              <img
-                src={logoSVG_white.imageUrl}
-                alt="KGING Logo"
-                className="kging-navbar-logo"
-              />
-            </Link>
+          <Link
+            className="navbar-brand kging-navbar-brand d-lg-none"
+            to="/"
+            onClick={handleCloseMenu}
+          >
+            <img
+              src={logoSVG_white.imageUrl}
+              alt="KGING Logo"
+              className="kging-navbar-logo"
+            />
+          </Link>
 
-            <button
-              className={`navbar-toggler kging-navbar-toggler ${
-                isMenuOpen ? "" : "collapsed"
-              }`}
-              type="button"
-              onClick={handleToggleMenu}
-              aria-controls="kgingNavbar"
-              aria-expanded={isMenuOpen}
-              aria-label="Toggle navigation"
-            >
-              <span className="kging-navbar-toggler-icon">
-                <span></span>
-                <span></span>
-                <span></span>
-              </span>
-            </button>
-          </div>
+          <button
+            className={`navbar-toggler kging-navbar-toggler ${
+              isMenuOpen ? "" : "collapsed"
+            }`}
+            type="button"
+            // data-bs-toggle="collapse"
+            // data-bs-target="#kgingNavbar"
+            onClick={handleToggleMenu}
+            aria-expanded={isMenuOpen}
+            aria-controls="kgingNavbar"
+            // aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
 
           <div
+            className={`collapse navbar-collapse kging-navbar-collapse ${
+              isMenuOpen ? "show" : ""
+            }`}
             id="kgingNavbar"
-            className={`kging-mobile-collapse ${isMenuOpen ? "is-open" : ""}`}
           >
             <ul className="navbar-nav kging-nav-left">
               {categoryLinks.map((item) => {
@@ -130,7 +143,6 @@ export default function Header() {
               >
                 <i className="fas fa-heart"></i>
               </Link>
-
               <Link
                 to="/cart"
                 onClick={handleCloseMenu}
