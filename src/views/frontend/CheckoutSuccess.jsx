@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router";
-import "../../styles/checkoutSuccess.css";
+import "../../styles/checkout-success.css";
 import { useEffect, useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import {

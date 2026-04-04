@@ -1,4 +1,4 @@
-import "../styles/Home_GuaranteeBar.css";
+import "../styles/home-guarantee-bar.css";
 
 export default function Home_GuaranteeBar() {
   const guarantees = [

@@ -1,4 +1,4 @@
-import "../styles/Home_BrandFeature.css";
+import "../styles/home-brand-feature.css";
 
 export default function Home_BrandFeature() {
   const features = [

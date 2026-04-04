@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import { store } from "./store/store.js";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./styles/kging-theme.css";
-import './styles/loadingOverlay.css';
+import './styles/loading-overlay.css';
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import "../styles/Home_ProductList.css";
+import "../styles/home-product-list.css";
 
 export default function Home_ProductList() {
   const categories = [

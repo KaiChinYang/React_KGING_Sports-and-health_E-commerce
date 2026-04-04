@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router";
 import { createAsyncAddCart } from "../../slice/cartSlice";
 import { getFavorites, toggleFavorite } from "../../utils/favorite";
 import { currency } from "../../utils/filter";
-import "../../styles/SingleProduct.css";
+import "../../styles/single-product.css";
 import ProductDescription from "../../components/ProductDescription";
 import LoadingOverlay from "../../components/LoadingOverlay";
 import { getSingleProductsApi } from "../../services/products";

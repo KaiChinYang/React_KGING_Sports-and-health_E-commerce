@@ -4,7 +4,7 @@ import { useNavigate, useSearchParams } from "react-router";
 import { getAllProductsApi, getProductsApi } from "../../services/products";
 import { getFavorites, toggleFavorite } from "../../utils/favorite";
 import Pagination from "../../components/Pagination";
-import "../../styles/Products.css";
+import "../../styles/products.css";
 import LoadingOverlay from "../../components/LoadingOverlay";
 
 const Products = () => {

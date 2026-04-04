@@ -1,4 +1,4 @@
-import "../styles/Paginantion.css";
+import "../styles/paginantion.css";
 export default function Pagination({ pagination, onPageChange }) {
   const handleClick = (e, page, isDisabled = false) => {
     e.preventDefault();

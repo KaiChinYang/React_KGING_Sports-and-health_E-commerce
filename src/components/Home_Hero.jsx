@@ -9,7 +9,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { homeContent } from "../data/homeContent";
-import "../styles/Home_Hero.css";
+import "../styles/home-hero.css";
 
 export default function Home_Hero() {
   const { hero } = homeContent;

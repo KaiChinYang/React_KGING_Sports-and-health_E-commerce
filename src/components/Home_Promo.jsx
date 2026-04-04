@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import "../styles/Home_Promo.css";
+import "../styles/home-promo.css";
 
 export default function Home_Promo() {
   return (

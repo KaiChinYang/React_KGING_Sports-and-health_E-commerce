@@ -2,7 +2,7 @@ import {  useEffect, useState } from "react";
 import { Link } from "react-router";
 import { getAllProductsApi } from "../services/products";
 import { currency } from "../utils/filter";
-import "../styles/Home_BestSellers.css";
+import "../styles/home-best-sellers.css";
 
 export default function Home_BestSellers() {
   const [starProducts, setStarProducts] = useState([]);
