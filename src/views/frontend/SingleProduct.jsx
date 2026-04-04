@@ -287,7 +287,7 @@ function SingleProduct() {
                       <div className="d-grid gap-3">
                         <button
                           type="button"
-                          className={`btn ${isFavorite ? "btn-danger" : "btn-outline-dark"}`}
+                          className={`btn ${isFavorite ? "btn-danger" : "btn-outline-custom"}`}
                           onClick={(e) => handleToggleFavorite(e, product.id)}
                         >
                           <i
