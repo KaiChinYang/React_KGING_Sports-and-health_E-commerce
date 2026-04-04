@@ -42,7 +42,7 @@ export default function Home_GuaranteeBar() {
 
           <div className="row g-0">
             {guarantees.map((item, index) => (
-              <div className="col-12 col-md-6 col-xl-3" key={item.id}>
+              <div className="col-md-6 col-xl-3" key={item.id}>
                 <div
                   className={`home-guarantee-item h-100 ${
                     index !== guarantees.length - 1

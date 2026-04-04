@@ -50,7 +50,7 @@ export default function Home_ProductList() {
 
         <div className="row g-4">
           {categories.map((category) => (
-            <div className="col-12 col-sm-6 col-lg-3" key={category.id}>
+            <div className="col-sm-6 col-lg-3" key={category.id}>
               <Link
                 to={category.link}
                 className="home-category-link text-decoration-none"

@@ -10,7 +10,7 @@ export default function Footer() {
       <div className="container">
         <div className="kging-footer-main">
           <div className="row g-4">
-            <div className="col-12 col-lg-4">
+            <div className=" col-lg-4">
               <div className="kging-footer-brand">
                 <Link to="/" className="kging-footer-logo">
                   <img
@@ -93,7 +93,7 @@ export default function Footer() {
               </div>
             </div>
 
-            <div className="col-12 col-md-4 col-lg-3">
+            <div className=" col-md-4 col-lg-3">
               <div className="kging-footer-block">
                 <h3 className="kging-footer-title">聯絡我們</h3>
                 <ul className="kging-footer-contact">

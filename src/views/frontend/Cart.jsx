@@ -8,12 +8,14 @@ import {
 import "../../styles/cart.css";
 import LoadingOverlay from "../../components/LoadingOverlay";
 import { useState } from "react";
+import useMessage from "../../hooks/useMessage";
 
 function Cart() {
   const carts = useSelector((state) => state.cart.carts);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const { showError } = useMessage();
 
   async function handleRemoveCart(e, id) {
     e.preventDefault();
@@ -21,7 +23,7 @@ function Cart() {
     try {
       await dispatch(createAsyncDeleteCart(id));
     } catch (error) {
-      console.log(error);
+      showError(`無法移除商品，請稍後再試。 ${error.response?.data?.message}`);
     } finally {
       setIsLoading(false);
     }
@@ -36,7 +38,7 @@ function Cart() {
     try {
       await dispatch(createAsyncUpdateCartQty({ cartId, productId, qty }));
     } catch (error) {
-      console.log(error);
+      showError(`無法更新商品數量，請稍後再試。 ${error.response?.data?.message}`);
     } finally{
       setIsLoading(false);
     }

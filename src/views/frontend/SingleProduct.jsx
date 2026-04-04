@@ -8,6 +8,7 @@ import "../../styles/single-product.css";
 import ProductDescription from "../../components/ProductDescription";
 import LoadingOverlay from "../../components/LoadingOverlay";
 import { getSingleProductsApi } from "../../services/products";
+import useMessage from "../../hooks/useMessage";
 
 const API_BASE = import.meta.env.VITE_API_BASE;
 const API_PATH = import.meta.env.VITE_API_PATH;
@@ -20,6 +21,7 @@ function SingleProduct() {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { showError } = useMessage();
 
   async function handleAddCart(e, id, qty = 1) {
     setIsLoading(true);
@@ -27,7 +29,7 @@ function SingleProduct() {
     try {
       await dispatch(createAsyncAddCart({ id, qty }));
     } catch (error) {
-      console.log(error);
+      showError(`無法將商品加入購物車，請稍後再試 (${error.message})`);
     } finally {
       setIsLoading(false);
     }
@@ -39,7 +41,7 @@ function SingleProduct() {
       await handleAddCart(e, id, qty);
       navigate("/checkout");
     } catch (error) {
-      console.log(error);
+      showError(`購買商品發生錯誤，請稍後再試 (${error.message})`);
     } finally {
       setIsLoading(false);
     }
@@ -76,13 +78,13 @@ function SingleProduct() {
         const res = await getSingleProductsApi(productId);
         setProduct(res.data.product);
       } catch (error) {
-        console.log(error);
+        showError(`無法載入商品資訊，請稍後再試 (${error.message})`);
       } finally {
         setIsLoading(false);
       }
     }
     getSingleProduct(id);
-  }, [id]);
+  }, [id,showError]);
 
   //讀取最愛
   useEffect(() => {

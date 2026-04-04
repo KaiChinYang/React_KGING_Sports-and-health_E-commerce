@@ -41,7 +41,7 @@ export default function Home_BrandFeature() {
 
         <div className="row g-4">
           {features.map((feature) => (
-            <div className="col-12 col-md-6 col-lg-3" key={feature.id}>
+            <div className=" col-md-6 col-lg-3" key={feature.id}>
               <div className="kging-card home-brand-feature-card h-100 text-center">
                 <div className="kging-card-body home-brand-feature-body">
                   <div className="home-brand-feature-icon">

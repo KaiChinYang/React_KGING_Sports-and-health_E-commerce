@@ -14,11 +14,13 @@ import "../../styles/Checkout.css";
 import { useNavigate } from "react-router";
 import { unwrapResult } from "@reduxjs/toolkit";
 import LoadingOverlay from "../../components/LoadingOverlay";
+import useMessage from "../../hooks/useMessage";
 
 function Checkout() {
   const navigate = useNavigate();
   const carts = useSelector((state) => state.cart.carts);
   const final_total = useSelector((state) => state.cart.final_total);
+  const { showError } = useMessage();
   // const subtotal = final_total || 0;
   // const shippingFee = subtotal > 1500 ? 0 : 60;
   // const orderTotal = carts?.length ? subtotal + shippingFee : 0;
@@ -43,7 +45,7 @@ function Checkout() {
     try {
       await dispatch(createAsyncUpdateCartQty({ cartId, productId, qty }));
     } catch (error) {
-      console.log(error);
+      showError(`無法更新商品數量，請稍後再試。 ${error.response?.data?.message}`);
     } finally {
       // setLoadingProductId(null);
       setIsLoading(false);
@@ -56,7 +58,7 @@ function Checkout() {
     try {
       await dispatch(createAsyncDeleteCart(cartId));
     } catch (error) {
-      console.log(error);
+      showError(`無法刪除購物車商品，請稍後再試。 ${error.response?.data?.message}`);
     } finally {
       // setLoadingProductId(null);
       setIsLoading(false);
@@ -71,7 +73,7 @@ function Checkout() {
     try {
       await dispatch(createAsyncClearCart());
     } catch (error) {
-      console.log(error);
+      showError(`無法清空購物車，請稍後再試。 ${error.response?.data?.message}`);
     } finally {
       setIsLoading(false);
     }
@@ -88,7 +90,7 @@ function Checkout() {
       reset();
       navigate(`/checkout-success/${orderId}`);
     } catch (error) {
-      console.log(error);
+      showError(`無法送出訂單，請稍後再試。 ${error.response?.data?.message}`);
     } finally {
       setIsLoading(false);
     }

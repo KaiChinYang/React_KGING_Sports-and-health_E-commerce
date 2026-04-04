@@ -4,12 +4,13 @@ import { getAllProductsApi } from "../../services/products";
 import { getFavorites, toggleFavorite } from "../../utils/favorite";
 import { currency } from "../../utils/filter";
 import LoadingOverlay from "../../components/LoadingOverlay";
-
+import useMessage from "../../hooks/useMessage";
 function Favorite() {
   const [favoriteProducts, setFavoriteProducts] = useState([]);
   const [favoriteIds, setFavoriteIds] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { showError } = useMessage();
 
   const getFavoriteProducts = useCallback(async () => {
     setIsLoading(true);
@@ -31,11 +32,11 @@ function Favorite() {
 
       setFavoriteProducts(result);
     } catch (error) {
-      console.log(error);
+      showError(`無法載入最愛商品，請稍後再試 (${error.message})`);
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [showError]);
 
   useEffect(() => {
     getFavoriteProducts();

@@ -7,6 +7,7 @@ import {
   createAsyncPayOrder,
 } from "../../slice/cartSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
+import useMessage from "../../hooks/useMessage";
 
 function CheckoutSuccess() {
   const { orderId } = useParams();
@@ -14,6 +15,7 @@ function CheckoutSuccess() {
   const [orderInfo, setOrderInfo] = useState({});
   const [loading, setLoading] = useState(true);
   const [paying, setPaying] = useState(false);
+  const { showError } = useMessage();
 
   const fetchOrder = useCallback(async () => {
     try {
@@ -32,11 +34,11 @@ function CheckoutSuccess() {
         isPaid: order.is_paid || false,
       });
     } catch (error) {
-      console.log(error);
+      showError(`無法載入訂單資訊，請稍後再試 (${error.message})`);
     } finally {
       setLoading(false);
     }
-  }, [orderId, dispatch]);
+  }, [orderId, dispatch, showError]);
   useEffect(() => {
     if (orderId) {
       fetchOrder();
@@ -58,7 +60,7 @@ function CheckoutSuccess() {
       await dispatch(createAsyncPayOrder(orderId)).unwrap();
       await fetchOrder();
     } catch (error) {
-      console.log(error);
+      showError(`付款失敗，請稍後再試 (${error.message})`);
     } finally {
       setPaying(false);
     }

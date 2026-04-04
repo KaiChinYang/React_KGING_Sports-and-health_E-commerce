@@ -7,7 +7,7 @@ export default function Home_Promo() {
       <div className="container">
         <div className="home-promo-box kging-card">
           <div className="row align-items-center g-4">
-            <div className="col-12 col-lg-6">
+            <div className=" col-lg-6">
               <div className="home-promo-content">
                 <p className="kging-section-label mb-3">FREE SHIPPING</p>
 
@@ -36,7 +36,7 @@ export default function Home_Promo() {
               </div>
             </div>
 
-            <div className="col-12 col-lg-6">
+            <div className=" col-lg-6">
               <div className="home-promo-image-wrap">
                 <img
                   src="https://storage.googleapis.com/vue-course-api.appspot.com/papaya_kg_4health/1773813392224.png"

@@ -6,6 +6,7 @@ import { getFavorites, toggleFavorite } from "../../utils/favorite";
 import Pagination from "../../components/Pagination";
 import "../../styles/products.css";
 import LoadingOverlay from "../../components/LoadingOverlay";
+import useMessage from "../../hooks/useMessage";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -16,6 +17,7 @@ const Products = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const currentCategory = searchParams.get("category") || "All";
+  const { showError } = useMessage();
 
   function handleChangeCategory(e, category) {
     e.preventDefault();
@@ -44,11 +46,11 @@ const Products = () => {
       ];
       setCategories(result);
     } catch (error) {
-      console.log(error);
+      showError(`無法載入商品類別，請稍後再試 (${error.message})`);
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [showError]);
 
   const getProducts = useCallback(async (page = 1, category = "All") => {
     setIsLoading(true);
@@ -58,11 +60,11 @@ const Products = () => {
       setProducts(res.data.products);
       setPagination(res.data.pagination);
     } catch (error) {
-      console.log(error);
+      showError(`無法載入商品，請稍後再試 (${error.message})`);
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [showError]);
 
   useEffect(() => {
     getAllCategories();

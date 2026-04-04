@@ -1,10 +1,12 @@
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { getAllProductsApi } from "../services/products";
 import { currency } from "../utils/filter";
 import "../styles/home-best-sellers.css";
+import useMessage from "../hooks/useMessage";
 
 export default function Home_BestSellers() {
+  const { showError } = useMessage();
   const [starProducts, setStarProducts] = useState([]);
 
   // const getStarProducts = useCallback(async () => {
@@ -13,7 +15,9 @@ export default function Home_BestSellers() {
   //     const result = res.data.products.filter((item) => item.star === true);
   //     setStarProducts(result);
   //   } catch (error) {
-  //     console.log(error);
+  //     showError(
+  //       `無法取得熱銷商品，請稍後再試。 ${error.response?.data?.message}`,
+  //     );
   //   }
   // }, []);
 
@@ -27,11 +31,13 @@ export default function Home_BestSellers() {
         const result = res.data.products.filter((item) => item.star === true);
         setStarProducts(result);
       } catch (error) {
-        console.log(error);
+        showError(
+          `無法取得熱銷商品，請稍後再試。 ${error.response?.data?.message}`,
+        );
       }
     }
     getStarProducts();
-  }, []);
+  }, [showError]);
 
   return (
     <section className="home-best-sellers kging-section">
@@ -46,7 +52,7 @@ export default function Home_BestSellers() {
 
         <div className="row g-4">
           {starProducts.map((product) => (
-            <div className="col-12 col-sm-6 col-lg-3" key={product.id}>
+            <div className=" col-sm-6 col-lg-3" key={product.id}>
               <Link
                 to={`/product/${product.id}`}
                 className="home-best-link text-decoration-none"
