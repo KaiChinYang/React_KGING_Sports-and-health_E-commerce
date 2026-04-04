@@ -97,16 +97,26 @@ export default function Footer() {
               <div className="kging-footer-block">
                 <h3 className="kging-footer-title">聯絡我們</h3>
                 <ul className="kging-footer-contact">
-                  <li>
-                    <i className="bi bi-envelope"></i>
-                    <span>service@kging.com</span>
+                  <li className="mb-2">
+                    <a
+                      href="mailto:service@kging.com"
+                      className="footer-link text-decoration-none text-white"
+                    >
+                      <i className="bi bi-envelope-fill me-2"></i>
+                      <span>service@kging.com</span>
+                    </a>
+                  </li>
+                  <li className="mb-2">
+                    <a
+                      href="tel:0900000000"
+                      className="text-decoration-none text-white footer-link"
+                    >
+                      <i className="bi bi-telephone-fill me-2"></i>
+                      <span>0900-000-000</span>
+                    </a>
                   </li>
                   <li>
-                    <i className="bi bi-telephone"></i>
-                    <span>0900-000-000</span>
-                  </li>
-                  <li>
-                    <i className="bi bi-clock"></i>
+                    <i className="bi bi-clock-fill "></i>
                     <span>週一至週五 09:00 - 18:00</span>
                   </li>
                 </ul>

@@ -117,6 +117,30 @@
     margin-bottom: 0;
 }
 
+.footer-link {
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    opacity: 0.85;
+}
+
+.footer-link i {
+    font-size: 1.1rem;
+}
+
+/* 滑鼠移入時的特效 */
+.footer-link:hover {
+    opacity: 1;
+    color: #00d1b2 !important;
+    transform: translateX(8px);
+}
+
+/* 讓 icon 在 hover 時有一點點縮放感 */
+.footer-link:hover i {
+    transform: scale(1.2);
+    transition: transform 0.2s ease;
+}
+
 @media (max-width: 991px) {
     .kging-footer-main {
         padding: 20px 0 28px;
